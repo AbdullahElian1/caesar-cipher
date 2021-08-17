@@ -49,9 +49,8 @@ def crack(text):
             result= (to_check, i)
     
     if result:
-        return f"after decode the message will be {result[0]} and the key was {result[1]}"
-    else:
-        return "orginal message doesn't has meaningfull words"
+        return result
+    
         
 
     
