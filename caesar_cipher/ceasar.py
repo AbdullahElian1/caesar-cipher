@@ -6,7 +6,8 @@ from caesar_cipher.is_englesh import count_words
 
 
 def encrypt(plain, key):
-    plain = re.sub(r'[^A-Za-z]+','', plain)
+    plain = re.sub(r'[^A-Za-z]+','_', plain)
+    print(plain)
     
 
     encrypted_text = ""
@@ -14,18 +15,16 @@ def encrypt(plain, key):
 
     for char in plain:
         
+        if char =="_":
+            encrypted_text += " "
+            continue
         num=ord(char)
-        # print(ord("z"))
         if char.islower():
             shifted_num = (num + key -97) % 26 +97
         else:
             shifted_num = (num + key -65) % 26 +65
         
         encrypted_text += f"{str(chr(shifted_num))}"
-        # print(encrypted_text)
-    encrypted_text = re.sub(r'[T]+',' ', encrypted_text)
-
-    # print(encrypted_text)
         
 
     return encrypted_text
@@ -45,7 +44,7 @@ def crack(text):
         to_check=decrypt(text,i)
         count=count_words(to_check)
         percentage = int(count / len(text.split()) * 100)
-        # print(percentage)
+       
         if percentage > 50:
             result= (to_check, i)
     
@@ -59,20 +58,20 @@ def crack(text):
 
 
 
-if __name__ == "__main__":
-    pins = [
-        "anas check"
-    ]
+# if __name__ == "__main__":
+#     pins = [
+#         "anas check"
+#     ]
 
-    # for pin in pins:
-    #     key = 15
-    #     print("plain pin", pin)
-    #     encrypted_pin = encrypt(pin, key)
-    #     print("encrypted_pin", encrypted_pin)
-        # decrypted_pin = decrypt(encrypted_pin, key)
-        # print("decrypted_pin", decrypted_pin)
-    x=encrypt("True",16)
-    y=crack(x)
+#     # for pin in pins:
+#     #     key = 15
+#     #     print("plain pin", pin)
+#     #     encrypted_pin = encrypt(pin, key)
+#     #     print("encrypted_pin", encrypted_pin)
+#         # decrypted_pin = decrypt(encrypted_pin, key)
+#         # print("decrypted_pin", decrypted_pin)
+#     x=encrypt("Good Dog be animial test ",23)
+#     y=crack(x)
     
-    print(f"the encription message was {x}") 
-    print(y)
+#     print(f"the encription message was {x}") 
+#     print(y)
